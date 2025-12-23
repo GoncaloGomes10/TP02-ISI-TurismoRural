@@ -1,0 +1,260 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f0f9ff 0%, #ecfdf5 50%, #f0fdf4 100%);
+}
+
+/* Header */
+.header {
+  background-color: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.headerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logoIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #16a34a;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.logoText {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1f2937;
+}
+
+.logoutButton {
+  background-color: transparent;
+  border: 2px solid #16a34a;
+  color: #16a34a;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.logoutButton:hover {
+  background-color: #f0fdf4;
+}
+
+/* Main */
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+}
+
+.title {
+  font-size: 2.25rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Mensagens */
+.error {
+  max-width: 600px;
+  margin: 0 auto 1rem;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.messageSuccess {
+  max-width: 600px;
+  margin: 0 auto 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid #16a34a;
+  background-color: #dcfce7;
+  color: #166534;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Botões gerais */
+.buttonContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.button {
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.buttonPrimary {
+  background-color: #16a34a;
+  color: white;
+}
+
+.buttonPrimary:hover:not(:disabled) {
+  background-color: #15803d;
+}
+
+.buttonSecondary {
+  background-color: white;
+  color: #16a34a;
+  border: 2px solid #16a34a;
+}
+
+.buttonSecondary:hover {
+  background-color: #f0fdf4;
+}
+
+/* Lista de casas */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.75rem;
+  margin-top: 1.5rem;
+}
+
+.card {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.25rem;
+}
+
+.cardDesc {
+  font-size: 0.95rem;
+  color: #6b7280;
+}
+
+.cardAddress {
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+/* Formulário criar/editar */
+.reservaForm {
+  margin-top: 2rem;
+  max-width: 600px;
+  padding: 1.5rem 1.75rem;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+
+.reservaField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.reservaField label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.reservaField input,
+.reservaField textarea,
+.reservaField select {
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d1d5db;
+  font-size: 0.95rem;
+}
+
+.reservaField input:focus,
+.reservaField textarea:focus,
+.reservaField select:focus {
+  outline: none;
+  border-color: #16a34a;
+  box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.15);
+}
+
+/* Footer */
+.footer {
+  background-color: #1f2937;
+  color: white;
+  padding: 2rem 0;
+}
+
+.footerContent {
+  text-align: center;
+}
+
+.footerText {
+  color: #9ca3af;
+}
+
+/* Responsivo */
+@media (max-width: 640px) {
+  .main {
+    padding: 2rem 1rem 3rem;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+}
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+}
+
+.modal {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 1.75rem 2rem;
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.modalTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 1rem;
+}

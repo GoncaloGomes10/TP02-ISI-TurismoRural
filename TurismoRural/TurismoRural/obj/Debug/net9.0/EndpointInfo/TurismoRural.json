@@ -1,0 +1,1324 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "TurismoRural",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/Avaliacoes/CriarAvaliacao": {
+      "post": {
+        "tags": [
+          "Avaliacoes"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CriarAvaliacaoDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CriarAvaliacaoDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CriarAvaliacaoDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Avaliacoes/EditarAvalicao/{id}": {
+      "put": {
+        "tags": [
+          "Avaliacoes"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditarAvalicaoDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditarAvalicaoDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditarAvalicaoDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Avaliacoes/ApagarAvalicao/{id}": {
+      "delete": {
+        "tags": [
+          "Avaliacoes"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Avaliacoes/PorCasa/{casaId}": {
+      "get": {
+        "tags": [
+          "Avaliacoes"
+        ],
+        "parameters": [
+          {
+            "name": "casaId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Casa_img/upload/{casaId}": {
+      "post": {
+        "tags": [
+          "Casa_img"
+        ],
+        "parameters": [
+          {
+            "name": "casaId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Casa_img/{casaId}": {
+      "get": {
+        "tags": [
+          "Casa_img"
+        ],
+        "parameters": [
+          {
+            "name": "casaId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Casa_img/{imagemId}": {
+      "delete": {
+        "tags": [
+          "Casa_img"
+        ],
+        "parameters": [
+          {
+            "name": "imagemId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Casas/CriarCasa": {
+      "post": {
+        "tags": [
+          "Casas"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CriarCasaDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CriarCasaDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CriarCasaDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Casas/EditarCasa/{id}": {
+      "put": {
+        "tags": [
+          "Casas"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CriarCasaDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CriarCasaDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CriarCasaDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Casas/DeleteCasa/{id}": {
+      "delete": {
+        "tags": [
+          "Casas"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Casas/Casas": {
+      "get": {
+        "tags": [
+          "Casas"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Casas/{id}": {
+      "get": {
+        "tags": [
+          "Casas"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/CodigoPostal/validate={codigoPostal}": {
+      "get": {
+        "tags": [
+          "CodigoPostal"
+        ],
+        "parameters": [
+          {
+            "name": "codigoPostal",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodigoPostal"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodigoPostal"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodigoPostal"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/CodigoPostal/{codigoPostal}": {
+      "get": {
+        "tags": [
+          "CodigoPostal"
+        ],
+        "parameters": [
+          {
+            "name": "codigoPostal",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodigoPostal"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodigoPostal"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodigoPostal"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Reservas/CriarReserva": {
+      "post": {
+        "tags": [
+          "Reservas"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CriarReservaDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CriarReservaDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CriarReservaDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Reservas/EditarReserva/{id}": {
+      "put": {
+        "tags": [
+          "Reservas"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditarReservaDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditarReservaDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditarReservaDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Reservas/CancelarReserva/{id}": {
+      "delete": {
+        "tags": [
+          "Reservas"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Reservas/PorCasa/{casaId}": {
+      "get": {
+        "tags": [
+          "Reservas"
+        ],
+        "parameters": [
+          {
+            "name": "casaId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Reservas/MinhasReservas": {
+      "get": {
+        "tags": [
+          "Reservas"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Reservas/AtualizarEstados": {
+      "put": {
+        "tags": [
+          "Reservas"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Utilizadores/login": {
+      "post": {
+        "tags": [
+          "Utilizadores"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Utilizadores/signup": {
+      "post": {
+        "tags": [
+          "Utilizadores"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignupRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignupRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignupRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Utilizadores/refresh": {
+      "post": {
+        "tags": [
+          "Utilizadores"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Utilizadores/delete/{id}": {
+      "delete": {
+        "tags": [
+          "Utilizadores"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Utilizadores/profile": {
+      "get": {
+        "tags": [
+          "Utilizadores"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Utilizadores/update": {
+      "put": {
+        "tags": [
+          "Utilizadores"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Utilizadores/logout": {
+      "post": {
+        "tags": [
+          "Utilizadores"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Utilizadores": {
+      "get": {
+        "tags": [
+          "Utilizadores"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/WeatherForecast": {
+      "get": {
+        "tags": [
+          "WeatherForecast"
+        ],
+        "operationId": "GetWeatherForecast",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Avaliacao": {
+        "type": "object",
+        "properties": {
+          "avaliacaoID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "casaID": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "utilizadorID": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nota": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "comentario": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataAvaliacao": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "casa": {
+            "$ref": "#/components/schemas/Casa"
+          },
+          "utilizador": {
+            "$ref": "#/components/schemas/Utilizador"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Casa": {
+        "type": "object",
+        "properties": {
+          "casaID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "titulo": {
+            "maxLength": 150,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "tipologia": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "preco": {
+            "type": "number",
+            "format": "double"
+          },
+          "morada": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "codigoPostal": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "utilizadorID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "avaliacao": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Avaliacao"
+            },
+            "nullable": true
+          },
+          "casa_img": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Casa_img"
+            },
+            "nullable": true
+          },
+          "codigoPostalNavigation": {
+            "$ref": "#/components/schemas/CodigoPostal"
+          },
+          "reserva": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Reserva"
+            },
+            "nullable": true
+          },
+          "utilizador": {
+            "$ref": "#/components/schemas/Utilizador"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Casa_img": {
+        "type": "object",
+        "properties": {
+          "imagemID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "casaID": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "pathImagem": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "casa": {
+            "$ref": "#/components/schemas/Casa"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CodigoPostal": {
+        "type": "object",
+        "properties": {
+          "codigoPostal1": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "localidadeID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "casa": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Casa"
+            },
+            "nullable": true
+          },
+          "localidade": {
+            "$ref": "#/components/schemas/Localidade"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CriarAvaliacaoDTO": {
+        "type": "object",
+        "properties": {
+          "casaID": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nota": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "comentario": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CriarCasaDTO": {
+        "type": "object",
+        "properties": {
+          "titulo": {
+            "type": "string",
+            "nullable": true
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipologia": {
+            "type": "string",
+            "nullable": true
+          },
+          "preco": {
+            "type": "number",
+            "format": "double"
+          },
+          "morada": {
+            "type": "string",
+            "nullable": true
+          },
+          "codigoPostal": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CriarReservaDTO": {
+        "required": [
+          "dataFim",
+          "dataInicio"
+        ],
+        "type": "object",
+        "properties": {
+          "casaID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dataInicio": {
+            "type": "string",
+            "format": "date"
+          },
+          "dataFim": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Distrito": {
+        "type": "object",
+        "properties": {
+          "distritoID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "localidade": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Localidade"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EditarAvalicaoDTO": {
+        "type": "object",
+        "properties": {
+          "avaliacaoID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nota": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "comentario": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EditarReservaDTO": {
+        "required": [
+          "dataFim",
+          "dataInicio"
+        ],
+        "type": "object",
+        "properties": {
+          "dataInicio": {
+            "type": "string",
+            "format": "date"
+          },
+          "dataFim": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Localidade": {
+        "type": "object",
+        "properties": {
+          "localidadeID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "distritoID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigoPostal": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CodigoPostal"
+            },
+            "nullable": true
+          },
+          "distrito": {
+            "$ref": "#/components/schemas/Distrito"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "palavraPass": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RefreshRequest": {
+        "type": "object",
+        "properties": {
+          "refreshToken": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Reserva": {
+        "type": "object",
+        "properties": {
+          "reservaID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "casaID": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "utilizadorID": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dataInicio": {
+            "type": "string",
+            "format": "date"
+          },
+          "dataFim": {
+            "type": "string",
+            "format": "date"
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "casa": {
+            "$ref": "#/components/schemas/Casa"
+          },
+          "utilizador": {
+            "$ref": "#/components/schemas/Utilizador"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SignupRequest": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "telemovel": {
+            "type": "string",
+            "nullable": true
+          },
+          "palavraPass": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateUserRequest": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "telemovel": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "palavraPass": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Utilizador": {
+        "type": "object",
+        "properties": {
+          "utilizadorID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "telemovel": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "palavraPass": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "isSupport": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "refreshToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "refreshTokenExpiryTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "avaliacao": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Avaliacao"
+            },
+            "nullable": true
+          },
+          "casa": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Casa"
+            },
+            "nullable": true
+          },
+          "reserva": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Reserva"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WeatherForecast": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "temperatureC": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "temperatureF": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

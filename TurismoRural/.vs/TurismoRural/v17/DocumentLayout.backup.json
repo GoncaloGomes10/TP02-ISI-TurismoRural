@@ -1,0 +1,105 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\gonca\\OneDrive\\Ambiente de Trabalho\\Reposit\u00F3rios\\RuralTurism-Backend\\TurismoRural\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{98149957-8860-45A1-BF2A-E984785B1380}|TurismoRural\\TurismoRural.csproj|c:\\users\\gonca\\onedrive\\ambiente de trabalho\\reposit\u00F3rios\\ruralturism-backend\\turismorural\\turismorural\\controllers\\casa_imgcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98149957-8860-45A1-BF2A-E984785B1380}|TurismoRural\\TurismoRural.csproj|solutionrelative:turismorural\\controllers\\casa_imgcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98149957-8860-45A1-BF2A-E984785B1380}|TurismoRural\\TurismoRural.csproj|c:\\users\\gonca\\onedrive\\ambiente de trabalho\\reposit\u00F3rios\\ruralturism-backend\\turismorural\\turismorural\\controllers\\utilizadorescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98149957-8860-45A1-BF2A-E984785B1380}|TurismoRural\\TurismoRural.csproj|solutionrelative:turismorural\\controllers\\utilizadorescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98149957-8860-45A1-BF2A-E984785B1380}|TurismoRural\\TurismoRural.csproj|c:\\users\\gonca\\onedrive\\ambiente de trabalho\\reposit\u00F3rios\\ruralturism-backend\\turismorural\\turismorural\\controllers\\casascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98149957-8860-45A1-BF2A-E984785B1380}|TurismoRural\\TurismoRural.csproj|solutionrelative:turismorural\\controllers\\casascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98149957-8860-45A1-BF2A-E984785B1380}|TurismoRural\\TurismoRural.csproj|c:\\users\\gonca\\onedrive\\ambiente de trabalho\\reposit\u00F3rios\\ruralturism-backend\\turismorural\\turismorural\\controllers\\avaliacoescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98149957-8860-45A1-BF2A-E984785B1380}|TurismoRural\\TurismoRural.csproj|solutionrelative:turismorural\\controllers\\avaliacoescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98149957-8860-45A1-BF2A-E984785B1380}|TurismoRural\\TurismoRural.csproj|c:\\users\\gonca\\onedrive\\ambiente de trabalho\\reposit\u00F3rios\\ruralturism-backend\\turismorural\\turismorural\\controllers\\reservascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98149957-8860-45A1-BF2A-E984785B1380}|TurismoRural\\TurismoRural.csproj|solutionrelative:turismorural\\controllers\\reservascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Casa_imgController.cs",
+              "DocumentMoniker": "C:\\Users\\gonca\\OneDrive\\Ambiente de Trabalho\\Reposit\u00F3rios\\RuralTurism-Backend\\TurismoRural\\TurismoRural\\Controllers\\Casa_imgController.cs",
+              "RelativeDocumentMoniker": "TurismoRural\\Controllers\\Casa_imgController.cs",
+              "ToolTip": "C:\\Users\\gonca\\OneDrive\\Ambiente de Trabalho\\Reposit\u00F3rios\\RuralTurism-Backend\\TurismoRural\\TurismoRural\\Controllers\\Casa_imgController.cs",
+              "RelativeToolTip": "TurismoRural\\Controllers\\Casa_imgController.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAgwGMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T22:57:14.517Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UtilizadoresController.cs",
+              "DocumentMoniker": "C:\\Users\\gonca\\OneDrive\\Ambiente de Trabalho\\Reposit\u00F3rios\\RuralTurism-Backend\\TurismoRural\\TurismoRural\\Controllers\\UtilizadoresController.cs",
+              "RelativeDocumentMoniker": "TurismoRural\\Controllers\\UtilizadoresController.cs",
+              "ToolTip": "C:\\Users\\gonca\\OneDrive\\Ambiente de Trabalho\\Reposit\u00F3rios\\RuralTurism-Backend\\TurismoRural\\TurismoRural\\Controllers\\UtilizadoresController.cs",
+              "RelativeToolTip": "TurismoRural\\Controllers\\UtilizadoresController.cs",
+              "ViewState": "AgIAAO0AAAAAAAAAAAAYwJ8AAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-21T23:29:00.114Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CasasController.cs",
+              "DocumentMoniker": "C:\\Users\\gonca\\OneDrive\\Ambiente de Trabalho\\Reposit\u00F3rios\\RuralTurism-Backend\\TurismoRural\\TurismoRural\\Controllers\\CasasController.cs",
+              "RelativeDocumentMoniker": "TurismoRural\\Controllers\\CasasController.cs",
+              "ToolTip": "C:\\Users\\gonca\\OneDrive\\Ambiente de Trabalho\\Reposit\u00F3rios\\RuralTurism-Backend\\TurismoRural\\TurismoRural\\Controllers\\CasasController.cs",
+              "RelativeToolTip": "TurismoRural\\Controllers\\CasasController.cs",
+              "ViewState": "AgIAAKwAAAAAAAAAAAAAwMUAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-21T23:23:45.991Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ReservasController.cs",
+              "DocumentMoniker": "C:\\Users\\gonca\\OneDrive\\Ambiente de Trabalho\\Reposit\u00F3rios\\RuralTurism-Backend\\TurismoRural\\TurismoRural\\Controllers\\ReservasController.cs",
+              "RelativeDocumentMoniker": "TurismoRural\\Controllers\\ReservasController.cs",
+              "ToolTip": "C:\\Users\\gonca\\OneDrive\\Ambiente de Trabalho\\Reposit\u00F3rios\\RuralTurism-Backend\\TurismoRural\\TurismoRural\\Controllers\\ReservasController.cs",
+              "RelativeToolTip": "TurismoRural\\Controllers\\ReservasController.cs",
+              "ViewState": "AgIAANkAAAAAAAAAAAAwwJMAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-21T21:25:42.208Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AvaliacoesController.cs",
+              "DocumentMoniker": "C:\\Users\\gonca\\OneDrive\\Ambiente de Trabalho\\Reposit\u00F3rios\\RuralTurism-Backend\\TurismoRural\\TurismoRural\\Controllers\\AvaliacoesController.cs",
+              "RelativeDocumentMoniker": "TurismoRural\\Controllers\\AvaliacoesController.cs",
+              "ToolTip": "C:\\Users\\gonca\\OneDrive\\Ambiente de Trabalho\\Reposit\u00F3rios\\RuralTurism-Backend\\TurismoRural\\TurismoRural\\Controllers\\AvaliacoesController.cs",
+              "RelativeToolTip": "TurismoRural\\Controllers\\AvaliacoesController.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAxwJAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-20T17:11:32.171Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
