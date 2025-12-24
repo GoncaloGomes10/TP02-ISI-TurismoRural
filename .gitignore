@@ -32,3 +32,9 @@ bin/
 obj/
 **/bin/
 **/obj/
+
+# Secrets (local only)
+secret/
+secret/**
+**/secret/
+**/secret/**
