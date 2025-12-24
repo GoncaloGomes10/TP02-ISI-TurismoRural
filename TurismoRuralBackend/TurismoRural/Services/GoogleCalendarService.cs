@@ -45,7 +45,7 @@ namespace TurismoRural.Services
 			return created.Id;
 		}
 
-		public async Task UpdateEventAsync(string eventId, string summary, DateTime startUtc, DateTime endUtc, string description)
+		public async Task UpdateEventAsync(string eventId, string summary, string description, DateTime startUtc, DateTime endUtc)
 		{
 			var ev = await _calendar.Events.Get(_calendarId, eventId).ExecuteAsync();
 			ev.Summary = summary;

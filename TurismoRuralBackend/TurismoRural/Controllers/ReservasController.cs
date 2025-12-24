@@ -143,6 +143,27 @@ namespace TurismoRural.Controllers
 
             await _context.SaveChangesAsync();
 
+			if (!string.IsNullOrWhiteSpace(reserva.GoogleEventId))
+			{
+				// Ajusta isto ao teu “significado” de data fim (se for checkout, normalmente é dia seguinte 00:00)
+				var startUtc = dto.DataInicio.ToDateTime(TimeOnly.MinValue).ToUniversalTime();
+				var endUtc = dto.DataFim.ToDateTime(TimeOnly.MinValue).ToUniversalTime();
+
+				var summary = $"Reserva #{reserva.ReservaID}";
+				var description = $"CasaID: {reserva.CasaID} | UtilizadorID: {reserva.UtilizadorID}";
+
+				try
+				{
+					await _googleCalendar.UpdateEventAsync(reserva.GoogleEventId, summary, description, startUtc, endUtc);
+				}
+				catch
+				{
+					// Não rebento o endpoint porque a BD já ficou consistente.
+					// Se quiseres, podes devolver 200 com aviso.
+					return Ok("Reserva editada com sucesso! (Aviso: não foi possível atualizar o Google Calendar)");
+				}
+			}
+
 			return Ok("Reserva editada com sucesso!");
         }
 
@@ -167,9 +188,25 @@ namespace TurismoRural.Controllers
                 return BadRequest("Nao pode cancelar uma reserva que ja comecou!");
 
             reserva.Estado = "Cancelada";
-            await _context.SaveChangesAsync(); 
+            await _context.SaveChangesAsync();
 
-            return Ok("Reserva cancelada com sucesso!");
+			if (!string.IsNullOrWhiteSpace(reserva.GoogleEventId))
+			{
+				try
+				{
+					await _googleCalendar.DeleteEventAsync(reserva.GoogleEventId);
+
+					// opcional: limpar o id depois de apagar
+					reserva.GoogleEventId = null;
+					await _context.SaveChangesAsync();
+				}
+				catch
+				{
+					return Ok("Reserva cancelada com sucesso! (Aviso: não foi possível remover do Google Calendar)");
+				}
+			}
+
+			return Ok("Reserva cancelada com sucesso!");
         }
 
         // GET: api/Reservas/PorCasa/id
@@ -255,8 +292,5 @@ namespace TurismoRural.Controllers
 
             return Ok($"{reservasParaTerminar.Count} reservas atualizadas para Terminada.");
         }
-
-
-
     }
 }
