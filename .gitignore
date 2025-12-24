@@ -21,3 +21,14 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.vs/
+
+# Visual Studio
+.vs/
+**/.vs/
+
+# .NET build outputs
+bin/
+obj/
+**/bin/
+**/obj/
