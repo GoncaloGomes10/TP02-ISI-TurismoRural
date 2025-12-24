@@ -36,6 +36,7 @@ builder.Services.AddCors(options =>
         });
 });
 
+builder.Services.AddSingleton<GoogleCalendarService>();
 builder.Services.AddSingleton(jwtSettings);
 builder.Services.AddScoped<JwtService>();
 builder.Services.AddAuthentication(options =>
@@ -76,11 +77,13 @@ using (var connection = new SqlConnection(connectionString))
 
 var app = builder.Build();
 
+var imagesPath = Path.Combine(app.Environment.ContentRootPath, "imgs_casa");
+Directory.CreateDirectory(imagesPath);
+
 app.UseStaticFiles(new StaticFileOptions
 {
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "imgs_casa")),
-    RequestPath = "/images/casa"
+	FileProvider = new PhysicalFileProvider(imagesPath),
+	RequestPath = "/images/casa"
 });
 
 // Middleware

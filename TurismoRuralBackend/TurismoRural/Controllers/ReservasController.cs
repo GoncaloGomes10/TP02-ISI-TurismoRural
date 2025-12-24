@@ -18,10 +18,12 @@ namespace TurismoRural.Controllers
     public class ReservasController : ControllerBase
     {
         private readonly TurismoContext _context;
+        private readonly GoogleCalendarService _googleCalendar;
 
-        public ReservasController(TurismoContext context)
+        public ReservasController(TurismoContext context, GoogleCalendarService googleCalendar)
         {
             _context = context;
+            _googleCalendar = googleCalendar;
         }
 
         // POST: api/Reservas/CriarReserva
@@ -68,12 +70,37 @@ namespace TurismoRural.Controllers
             _context.Reserva.Add( reserva );
             await _context.SaveChangesAsync();
 
-            return Ok("Reserva criada com sucesso!");
-        }
+			var summary = $"Reserva Casa {dto.CasaID} (User {userId})";
+			var desc = $"ReservaID: {reserva.ReservaID}\nCasaID: {reserva.CasaID}\nUtilizadorID: {userId}\nEstado: {reserva.Estado}";
+
+			// converter DateOnly → DateTime
+			var start = reserva.DataInicio
+				.ToDateTime(new TimeOnly(14, 0))
+				.ToUniversalTime();
+
+			var end = reserva.DataFim
+				.ToDateTime(new TimeOnly(11, 0))
+				.ToUniversalTime();
+
+			var eventId = await _googleCalendar.CreateEventAsync(
+				summary,
+				start,
+				end,
+				desc
+			);
+
+			Console.WriteLine("GOOGLE EVENT ID: " + eventId);
+
+			// guardar o ID do evento
+			reserva.GoogleEventId = eventId;
+			await _context.SaveChangesAsync();
+
+			return Ok("Reserva criada com sucesso!");
+		}
 
 
-        // PUT: api/Reservas/id
-        [Authorize(Roles = "User")]
+		// PUT: api/Reservas/id
+		[Authorize(Roles = "User")]
         [HttpPut("EditarReserva/{id}")]
         public async Task<IActionResult> EditarReserva(int id, [FromBody] EditarReservaDTO dto)
         {

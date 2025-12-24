@@ -27,6 +27,8 @@ public partial class Reserva
     [ForeignKey("UtilizadorID")]
     [InverseProperty("Reserva")]
     public virtual Utilizador? Utilizador { get; set; }
+
+	public string? GoogleEventId { get; set; }
 }
 
 public partial class CriarReservaDTO

@@ -1180,6 +1180,10 @@
           },
           "utilizador": {
             "$ref": "#/components/schemas/Utilizador"
+          },
+          "googleEventId": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
