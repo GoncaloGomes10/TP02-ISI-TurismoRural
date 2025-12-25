@@ -8,14 +8,28 @@ namespace TurismoRural.Tests;
 
 internal static class TestHelpers
 {
+	// DbContext só para testes (impede UseSqlServer do OnConfiguring do teu TurismoContext)
+	private sealed class TestTurismoContext : TurismoContext
+	{
+		public TestTurismoContext(DbContextOptions<TurismoContext> options) : base(options) { }
+
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		{
+			// NÃO chamar base.OnConfiguring(optionsBuilder)
+			// Assim o provider fica apenas InMemory
+		}
+	}
+
 	public static TurismoContext CreateInMemoryDb(string dbName)
 	{
 		var options = new DbContextOptionsBuilder<TurismoContext>()
-			.UseInMemoryDatabase(databaseName: dbName)
+			.UseInMemoryDatabase(dbName)
 			.EnableSensitiveDataLogging()
 			.Options;
 
-		return new TurismoContext(options);
+		var ctx = new TestTurismoContext(options);
+		ctx.Database.EnsureCreated();
+		return ctx;
 	}
 
 	public static void SetUser(ControllerBase controller, int userId, string role = "User", string email = "test@test.com", string name = "Teste")

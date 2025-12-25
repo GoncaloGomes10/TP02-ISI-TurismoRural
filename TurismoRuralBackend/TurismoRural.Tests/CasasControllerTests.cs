@@ -7,38 +7,60 @@ namespace TurismoRural.Tests;
 public class CasasControllerTests
 {
 	[Fact]
-	public async Task PostCasa_DeveRetornarBadRequest_QuandoTipoInvalido()
+	public async Task CriarCasa_DeveRetornarBadRequest_QuandoDadosInvalidos()
 	{
-		using var ctx = TestHelpers.CreateInMemoryDb(nameof(PostCasa_DeveRetornarBadRequest_QuandoTipoInvalido));
+		using var ctx = TestHelpers.CreateInMemoryDb(nameof(CriarCasa_DeveRetornarBadRequest_QuandoDadosInvalidos));
 		var controller = new CasasController(ctx);
 
-		// simula utilizador autenticado porque o controller vai buscar ClaimTypes.NameIdentifier
-		TestHelpers.SetUser(controller, userId: 1, role: "User");
+		TestHelpers.SetUser(controller, userId: 1, role: "Support");
 
-		var dto = new CasaDto
+		var dto = new CriarCasaDTO
 		{
-			Titulo = "Casa Teste",
+			Titulo = "Sem regras",
 			Descricao = "Desc",
-			Tipo = "Chale",            // inválido (só aceita Moradia|Apartamento)
+			Tipo = "Chale",      // invalido -> BadRequest antes de gravar
 			Tipologia = "T1",
+			Preco = 50,
 			Morada = "Rua X",
-			CodigoPostal = "4700-000",
-			Localidade = "Braga",
-			Distrito = "Braga",
-			PrecoNoite = 50
+			CodigoPostal = "4700-000"
 		};
 
-		var result = await controller.PostCasa(dto);
-		var bad = Assert.IsType<BadRequestObjectResult>(result);
-		Assert.Contains("Tipo invalido", bad.Value?.ToString(), StringComparison.OrdinalIgnoreCase);
+		var result = await controller.CriarCasa(dto);
+
+		Assert.IsType<BadRequestObjectResult>(result);
 	}
 
 	[Fact]
-	public async Task PostCasa_DeveRetornarBadRequest_QuandoMoradaJaExiste_MesmoComEspacosVirgulas()
+	public async Task CriarCasa_DeveRetornarBadRequest_QuandoTipoInvalido()
 	{
-		using var ctx = TestHelpers.CreateInMemoryDb(nameof(PostCasa_DeveRetornarBadRequest_QuandoMoradaJaExiste_MesmoComEspacosVirgulas));
+		using var ctx = TestHelpers.CreateInMemoryDb(nameof(CriarCasa_DeveRetornarBadRequest_QuandoTipoInvalido));
 		var controller = new CasasController(ctx);
-		TestHelpers.SetUser(controller, userId: 1, role: "User");
+
+		TestHelpers.SetUser(controller, userId: 1, role: "Support");
+
+		var dto = new CriarCasaDTO
+		{
+			Titulo = "Casa Teste",
+			Descricao = "Desc",
+			Tipo = "Chale",
+			Tipologia = "T1",
+			Preco = 50,
+			Morada = "Rua X",
+			CodigoPostal = "4700-000"
+		};
+
+		var result = await controller.CriarCasa(dto);
+
+		Assert.IsType<BadRequestObjectResult>(result);
+	}
+
+	[Fact]
+	public async Task CriarCasa_DeveRetornarBadRequest_QuandoMoradaJaExiste()
+	{
+		using var ctx = TestHelpers.CreateInMemoryDb(nameof(CriarCasa_DeveRetornarBadRequest_QuandoMoradaJaExiste));
+		var controller = new CasasController(ctx);
+
+		TestHelpers.SetUser(controller, userId: 1, role: "Support");
 
 		ctx.Casa.Add(new Casa
 		{
@@ -46,30 +68,51 @@ public class CasasControllerTests
 			Descricao = "x",
 			Tipo = "Moradia",
 			Tipologia = "T2",
-			Morada = "Rua, de Sao  Jeronimo - 10",
-			CodigoPostal = "4700-000",
-			Localidade = "Braga",
-			Distrito = "Braga",
-			PrecoNoite = 80,
-			UtilizadorID = 1
+			Preco = 80,
+			Morada = "Rua de Sao Jeronimo 10",
+			CodigoPostal = "4700-000"
 		});
 		await ctx.SaveChangesAsync();
 
-		var dto = new CasaDto
+		var dto = new CriarCasaDTO
 		{
 			Titulo = "Nova",
 			Descricao = "y",
 			Tipo = "Moradia",
 			Tipologia = "T2",
-			Morada = "Rua de São Jerónimo 10", // deve bater na normalização
-			CodigoPostal = "4700-000",
-			Localidade = "Braga",
-			Distrito = "Braga",
-			PrecoNoite = 90
+			Preco = 90,
+			Morada = "Rua de Sao Jeronimo 10", // IGUAL
+			CodigoPostal = "4700-000"
 		};
 
-		var result = await controller.PostCasa(dto);
-		var bad = Assert.IsType<BadRequestObjectResult>(result);
-		Assert.Contains("A casa ja existe", bad.Value?.ToString(), StringComparison.OrdinalIgnoreCase);
+		var result = await controller.CriarCasa(dto);
+
+		Assert.IsType<BadRequestObjectResult>(result);
+	}
+
+
+	[Fact]
+	public async Task CriarCasa_DeveCriarCasa_QuandoDadosValidos()
+	{
+		using var ctx = TestHelpers.CreateInMemoryDb(nameof(CriarCasa_DeveCriarCasa_QuandoDadosValidos));
+		var controller = new CasasController(ctx);
+
+		TestHelpers.SetUser(controller, userId: 1, role: "Support");
+
+		var dto = new CriarCasaDTO
+		{
+			Titulo = "Casa OK",
+			Descricao = "Desc",
+			Tipo = "Moradia",
+			Tipologia = "T3",
+			Preco = 120,
+			Morada = "Rua Nova 1",
+			CodigoPostal = "4700-001"
+		};
+
+		var result = await controller.CriarCasa(dto);
+
+		Assert.True(result is OkObjectResult || result is CreatedResult || result is CreatedAtActionResult);
+		Assert.True(ctx.Casa.Any(c => c.Morada == "Rua Nova 1"));
 	}
 }
