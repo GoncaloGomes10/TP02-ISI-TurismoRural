@@ -6,6 +6,12 @@ namespace TurismoRural.Tests;
 
 public class CasasControllerTests
 {
+
+	/// <summary>
+	/// Testa o endpoint CriarCasa e garante que devolve BadRequest
+	/// quando o DTO contém dados inválidos (ex.: Tipo inválido).
+	/// </summary>
+	/// <returns>Tarefa assíncrona do teste.</returns>
 	[Fact]
 	public async Task CriarCasa_DeveRetornarBadRequest_QuandoDadosInvalidos()
 	{
@@ -30,6 +36,11 @@ public class CasasControllerTests
 		Assert.IsType<BadRequestObjectResult>(result);
 	}
 
+	/// <summary>
+	/// Testa o endpoint CriarCasa e garante que devolve BadRequest
+	/// quando o campo Tipo é inválido (não é "Moradia" nem "Apartamento").
+	/// </summary>
+	/// <returns>Tarefa assíncrona do teste.</returns>
 	[Fact]
 	public async Task CriarCasa_DeveRetornarBadRequest_QuandoTipoInvalido()
 	{
@@ -54,6 +65,11 @@ public class CasasControllerTests
 		Assert.IsType<BadRequestObjectResult>(result);
 	}
 
+	/// <summary>
+	/// Testa o endpoint CriarCasa e garante que devolve BadRequest
+	/// quando já existe uma casa com a mesma morada (evita duplicados).
+	/// </summary>
+	/// <returns>Tarefa assíncrona do teste.</returns>
 	[Fact]
 	public async Task CriarCasa_DeveRetornarBadRequest_QuandoMoradaJaExiste()
 	{
@@ -90,7 +106,11 @@ public class CasasControllerTests
 		Assert.IsType<BadRequestObjectResult>(result);
 	}
 
-
+	/// <summary>
+	/// Testa o endpoint CriarCasa e garante que cria uma casa
+	/// quando os dados são válidos.
+	/// Confirma também que a casa ficou persistida na BD em memória.
+	/// </summary>
 	[Fact]
 	public async Task CriarCasa_DeveCriarCasa_QuandoDadosValidos()
 	{

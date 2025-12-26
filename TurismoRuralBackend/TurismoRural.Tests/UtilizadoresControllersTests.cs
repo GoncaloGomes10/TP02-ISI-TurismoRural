@@ -7,6 +7,11 @@ namespace TurismoRural.Tests;
 
 public class UtilizadoresControllerTests
 {
+	/// <summary>
+	/// Cria uma instância do JwtService com configurações de teste.
+	/// Utilizado nos testes unitários para gerar tokens JWT válidos.
+	/// </summary>
+	/// <returns>Instância configurada de JwtService.</returns>
 	private static JwtService CreateJwtService()
 	{
 		var settings = new JwtSettings
@@ -21,6 +26,11 @@ public class UtilizadoresControllerTests
 		return new JwtService(settings);
 	}
 
+	/// <summary>
+	/// Testa o endpoint Signup e garante que devolve BadRequest
+	/// quando o email tem um formato inválido.
+	/// </summary>
+	/// <returns>Tarefa assíncrona do teste.</returns>
 	[Fact]
 	public async Task Signup_DeveRetornarBadRequest_QuandoEmailInvalido()
 	{
@@ -38,6 +48,11 @@ public class UtilizadoresControllerTests
 		Assert.IsType<BadRequestObjectResult>(result);
 	}
 
+	/// <summary>
+	/// Testa o endpoint Signup e garante que devolve BadRequest
+	/// quando o email já se encontra registado na base de dados.
+	/// </summary>
+	/// <returns>Tarefa assíncrona do teste.</returns>
 	[Fact]
 	public async Task Signup_DeveRetornarBadRequest_QuandoEmailJaExiste()
 	{
@@ -58,6 +73,12 @@ public class UtilizadoresControllerTests
 		Assert.IsType<BadRequestObjectResult>(result);
 	}
 
+	/// <summary>
+	/// Testa o endpoint Signup e garante que cria um utilizador
+	/// quando os dados fornecidos são válidos.
+	/// Confirma também que o utilizador fica persistido na base de dados.
+	/// </summary>
+	/// <returns>Tarefa assíncrona do teste.</returns>
 	[Fact]
 	public async Task Signup_DeveCriarUtilizador_QuandoDadosValidos()
 	{
@@ -78,6 +99,11 @@ public class UtilizadoresControllerTests
 		Assert.True(ctx.Utilizador.Any(u => u.Email == "novo@teste.com"));
 	}
 
+	/// <summary>
+	/// Testa o endpoint Login e garante que devolve Unauthorized
+	/// quando as credenciais fornecidas são inválidas.
+	/// </summary>
+	/// <returns>Tarefa assíncrona do teste.</returns>
 	[Fact]
 	public async Task Login_DeveRetornarUnauthorized_QuandoCredenciaisInvalidas()
 	{
@@ -93,6 +119,11 @@ public class UtilizadoresControllerTests
 		Assert.True(result is UnauthorizedObjectResult || result is UnauthorizedResult);
 	}
 
+	/// <summary>
+	/// Testa o endpoint DeleteUser e garante que devolve Forbid
+	/// quando o utilizador autenticado não tem permissões de Support.
+	/// </summary>
+	/// <returns>Tarefa assíncrona do teste.</returns>
 	[Fact]
 	public async Task DeleteUser_DeveRetornarForbid_QuandoNaoESupport()
 	{

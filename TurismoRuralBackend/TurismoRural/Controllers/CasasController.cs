@@ -24,8 +24,19 @@ namespace TurismoRural.Controllers
             _context = context;
         }
 
-        // POST: api/Casas/CriarCasa
-        [Authorize(Roles = "Support")]
+		// POST: api/Casas/CriarCasa
+		/// <summary>
+		/// Cria uma nova casa.
+		/// Apenas utilizadores autenticados com o papel "Support" podem criar casas.
+		/// Valida preço, tipologia (T1 a T4), tipo (Moradia ou Apartamento) e evita duplicados por morada.
+		/// </summary>
+		/// <param name="dto">Dados da casa a criar.</param>
+		/// <returns>
+		/// Retorna OK se a casa for criada com sucesso.
+		/// Retorna BadRequest se os dados forem inválidos, se o preço não for válido,
+		/// se a tipologia/tipo não forem válidos ou se já existir uma casa com a mesma morada.
+		/// </returns>
+		[Authorize(Roles = "Support")]
         [HttpPost("CriarCasa")]
         public async Task<IActionResult> CriarCasa([FromBody] CriarCasaDTO dto)
         {
@@ -81,8 +92,20 @@ namespace TurismoRural.Controllers
             return Ok("Criada com sucesso");
         }
 
-        // PUT: api/Casas/id
-        [Authorize(Roles = "Support")]
+		// PUT: api/Casas/id
+		/// <summary>
+		/// Edita uma casa existente.
+		/// Apenas utilizadores autenticados com o papel "Support" podem editar casas.
+		/// Valida preço, tipologia, tipo e garante que a morada não fica duplicada noutra casa.
+		/// </summary>
+		/// <param name="id">Identificador da casa a editar.</param>
+		/// <param name="dto">Novos dados da casa.</param>
+		/// <returns>
+		/// Retorna OK se a casa for editada com sucesso.
+		/// Retorna BadRequest se os dados forem inválidos ou se existir outra casa com a mesma morada.
+		/// Retorna NotFound se a casa não existir.
+		/// </returns>
+		[Authorize(Roles = "Support")]
         [HttpPut("EditarCasa/{id}")]
         public async Task<IActionResult> EditarCasa(int id, [FromBody] CriarCasaDTO dto)
         {
@@ -136,8 +159,17 @@ namespace TurismoRural.Controllers
 			return Ok("Casa editada com sucesso");
 		}
 
-        // DELETE: api/Casas/id
-        [Authorize(Roles = "Support")]
+		// DELETE: api/Casas/id
+		/// <summary>
+		/// Elimina uma casa existente.
+		/// Apenas utilizadores autenticados com o papel "Support" podem eliminar casas.
+		/// </summary>
+		/// <param name="id">Identificador da casa a eliminar.</param>
+		/// <returns>
+		/// Retorna OK se a casa for eliminada com sucesso.
+		/// Retorna NotFound se a casa não existir.
+		/// </returns>
+		[Authorize(Roles = "Support")]
         [HttpDelete("DeleteCasa/{id}")]
         public async Task<IActionResult> DeleteCasa(int id)
         {
@@ -152,8 +184,14 @@ namespace TurismoRural.Controllers
             return Ok("Casas apagada com sucesso");
         }
 
-        // GET: api/Casas
-        [HttpGet("Casas")]
+		// GET: api/Casas
+		/// <summary>
+		/// Obtém a lista de todas as casas.
+		/// </summary>
+		/// <returns>
+		/// Retorna OK com a lista de casas (campos principais).
+		/// </returns>
+		[HttpGet("Casas")]
         public async Task<IActionResult> GetCasas()
         {
             var casas = await _context.Casa
@@ -173,8 +211,16 @@ namespace TurismoRural.Controllers
             return Ok(casas);
         }
 
-        // GET: api/Casas/id
-        [HttpGet("{id}")]
+		// GET: api/Casas/id
+		/// <summary>
+		/// Obtém os detalhes de uma casa específica.
+		/// </summary>
+		/// <param name="id">Identificador da casa.</param>
+		/// <returns>
+		/// Retorna OK com os dados da casa, caso exista.
+		/// Retorna NotFound se não existir nenhuma casa com o ID indicado.
+		/// </returns>
+		[HttpGet("{id}")]
         public async Task<IActionResult> GetCasa(int id)
         {
             var casa = await _context.Casa

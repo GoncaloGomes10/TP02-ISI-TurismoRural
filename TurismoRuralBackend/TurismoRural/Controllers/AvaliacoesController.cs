@@ -24,8 +24,21 @@ namespace TurismoRural.Controllers
             _context = context;
         }
 
-        // POST: api/Avaliacoes/CriarAvaliacao
-        [Authorize(Roles = "User")]
+		// POST: api/Avaliacoes/CriarAvaliacao
+		/// <summary>
+		/// Cria uma nova avaliação para uma casa.
+		/// Apenas utilizadores autenticados com o papel "User" podem criar avaliações.
+		/// A avaliação só pode ser criada após o término da reserva
+		/// e cada utilizador só pode avaliar uma casa uma única vez.
+		/// </summary>
+		/// <param name="dto">Objeto com os dados da avaliação (CasaID, Nota e Comentário).</param>
+		/// <returns>
+		/// Retorna OK se a avaliação for criada com sucesso.
+		/// Retorna BadRequest se os dados forem inválidos,
+		/// se a estadia ainda não tiver terminado
+		/// ou se o utilizador já tiver avaliado a casa.
+		/// </returns>
+		[Authorize(Roles = "User")]
         [HttpPost("CriarAvaliacao")]
         public async Task<IActionResult> CriarAvaliacao([FromBody] CriarAvaliacaoDTO dto)
         {
@@ -69,8 +82,19 @@ namespace TurismoRural.Controllers
             return Ok("Avaliacao criada com sucesso!");
         }
 
-        // PUT: api/Avalicao/id
-        [Authorize(Roles = "User")]
+		// PUT: api/Avalicao/id
+		/// <summary>
+		/// Edita uma avaliação existente.
+		/// Apenas o utilizador que criou a avaliação pode editá-la.
+		/// </summary>
+		/// <param name="id">Identificador da avaliação a editar.</param>
+		/// <param name="dto">Novos dados da avaliação (Nota e Comentário).</param>
+		/// <returns>
+		/// Retorna OK se a avaliação for editada com sucesso.
+		/// Retorna BadRequest se a avaliação não existir ou se a nota for inválida.
+		/// Retorna Forbid se o utilizador não for o proprietário da avaliação.
+		/// </returns>
+		[Authorize(Roles = "User")]
         [HttpPut("EditarAvalicao/{id}")]
         public async Task<IActionResult> EditarAvalicao(int id, [FromBody] EditarAvalicaoDTO dto)
         {
@@ -98,8 +122,18 @@ namespace TurismoRural.Controllers
 			return Ok("Avalicao editada com sucesso!");
         }
 
-        // DELETE:api/Avaliacao/id
-        [Authorize(Roles = "User")]
+		// DELETE:api/Avaliacao/id
+		/// <summary>
+		/// Apaga uma avaliação existente.
+		/// Apenas o utilizador que criou a avaliação pode apagá-la.
+		/// </summary>
+		/// <param name="id">Identificador da avaliação a apagar.</param>
+		/// <returns>
+		/// Retorna OK se a avaliação for apagada com sucesso.
+		/// Retorna NotFound se a avaliação não existir.
+		/// Retorna Forbid se o utilizador não for o proprietário da avaliação.
+		/// </returns>
+		[Authorize(Roles = "User")]
         [HttpDelete("ApagarAvalicao/{id}")]
         public async Task<IActionResult> ApagarAvalicao(int id)
         {
@@ -119,9 +153,17 @@ namespace TurismoRural.Controllers
 
 			return Ok("Avalicao apagada com sucesso!");
         }
-
-        // GET: api/Avaliacoes/PorCasa/5
-        [HttpGet("PorCasa/{casaId}")]
+        
+		// GET: api/Avaliacoes/PorCasa/5
+		/// <summary>
+		/// Obtém todas as avaliações associadas a uma determinada casa.
+		/// Inclui o nome do utilizador que realizou cada avaliação.
+		/// </summary>
+		/// <param name="casaId">Identificador da casa.</param>
+		/// <returns>
+		/// Retorna uma lista de avaliações ordenadas da mais recente para a mais antiga.
+		/// </returns>
+		[HttpGet("PorCasa/{casaId}")]
         public async Task<IActionResult> GetAvaliacoesPorCasa(int casaId)
         {
             var avaliacoes = await _context.Avaliacao

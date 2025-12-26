@@ -31,7 +31,18 @@ namespace TurismoRural.Controllers
             _jwtService = jwtService;
         }
 
-        [HttpPost("login")]
+		/// <summary>
+		/// Autentica um utilizador (login).
+		/// Valida as credenciais (email e palavra-passe), gera um AccessToken (JWT) e um RefreshToken.
+		/// O RefreshToken é guardado na base de dados com a respetiva data de expiração.
+		/// </summary>
+		/// <param name="request">Dados de login (Email e PalavraPass).</param>
+		/// <returns>
+		/// Retorna OK com AccessToken e RefreshToken se as credenciais forem válidas.
+		/// Retorna BadRequest se email/palavra-passe não forem enviados.
+		/// Retorna Unauthorized se as credenciais forem inválidas.
+		/// </returns>
+		[HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
             if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.PalavraPass))
@@ -62,7 +73,17 @@ namespace TurismoRural.Controllers
             });
         }
 
-        [HttpPost("signup")]
+		/// <summary>
+		/// Regista um novo utilizador (signup).
+		/// Valida email, valida palavra-passe e impede registos duplicados pelo mesmo email.
+		/// A palavra-passe é armazenada na base de dados em formato "hash".
+		/// </summary>
+		/// <param name="request">Dados do registo (Nome, Email, Telemovel e PalavraPass).</param>
+		/// <returns>
+		/// Retorna OK se o utilizador for criado com sucesso.
+		/// Retorna BadRequest se os dados forem inválidos ou se o email já existir.
+		/// </returns>
+		[HttpPost("signup")]
         public async Task<IActionResult> Signup([FromBody] SignupRequest request)
         {
             if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.PalavraPass))
@@ -92,7 +113,17 @@ namespace TurismoRural.Controllers
             return Ok("Registo feito com sucesso!");
         }
 
-        [Authorize]
+		/// <summary>
+		/// Renova os tokens de autenticação (refresh).
+		/// Recebe um RefreshToken válido, verifica se existe e se não expirou,
+		/// e devolve um novo AccessToken e um novo RefreshToken.
+		/// </summary>
+		/// <param name="request">Contém o RefreshToken atual.</param>
+		/// <returns>
+		/// Retorna OK com novos tokens se o RefreshToken for válido.
+		/// Retorna Unauthorized se o RefreshToken não existir ou estiver expirado.
+		/// </returns>
+		[Authorize]
         [HttpPost("refresh")]
         public async Task<IActionResult> Refresh([FromBody] RefreshRequest request)
         {
@@ -116,7 +147,19 @@ namespace TurismoRural.Controllers
             });
         }
 
-        [Authorize(Roles = "Support")]
+		/// <summary>
+		/// Elimina um utilizador pelo seu ID.
+		/// Apenas utilizadores com papel "Support" podem executar esta ação.
+		/// Não permite apagar utilizadores que tenham casas associadas.
+		/// </summary>
+		/// <param name="id">Identificador do utilizador a apagar.</param>
+		/// <returns>
+		/// Retorna OK se o utilizador for removido com sucesso.
+		/// Retorna Forbid se quem pede não for administrador/support.
+		/// Retorna NotFound se o utilizador não existir.
+		/// Retorna BadRequest se o utilizador tiver casas associadas.
+		/// </returns>
+		[Authorize(Roles = "Support")]
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
@@ -141,7 +184,16 @@ namespace TurismoRural.Controllers
             return Ok("Utilizador removido com sucesso.");
         }
 
-        [Authorize]
+		/// <summary>
+		/// Obtém o perfil do utilizador autenticado.
+		/// Devolve dados básicos: nome, email, telemóvel e se é suporte.
+		/// </summary>
+		/// <returns>
+		/// Retorna OK com os dados do utilizador.
+		/// Retorna NotFound se o utilizador não existir.
+		/// Retorna StatusCode 500 em caso de erro inesperado.
+		/// </returns>
+		[Authorize]
         [HttpGet("profile")]
         public async Task<IActionResult> GetProfile()
         {
@@ -167,7 +219,18 @@ namespace TurismoRural.Controllers
             }
         }
 
-        [Authorize]
+		/// <summary>
+		/// Atualiza os dados do utilizador autenticado.
+		/// Permite atualizar nome, telemóvel, email e palavra-passe.
+		/// Se o email ou a palavra-passe forem alterados, invalida o RefreshToken (força novo login).
+		/// </summary>
+		/// <param name="request">Dados a atualizar (Nome, Telemovel, Email e/ou PalavraPass).</param>
+		/// <returns>
+		/// Retorna OK se a atualização for bem-sucedida.
+		/// Retorna BadRequest se o email tiver formato inválido ou já estiver em uso.
+		/// Retorna NotFound se o utilizador não existir.
+		/// </returns>
+		[Authorize]
         [HttpPut("update")]
         public async Task<IActionResult> UpdateUser([FromBody] UpdateUserRequest request)
         {
@@ -223,7 +286,15 @@ namespace TurismoRural.Controllers
             return Ok("Dados atualizados com sucesso.");
         }
 
-        [Authorize]
+		/// <summary>
+		/// Efetua logout do utilizador autenticado.
+		/// Invalida o RefreshToken, obrigando novo login para voltar a obter tokens.
+		/// </summary>
+		/// <returns>
+		/// Retorna OK se o logout for efetuado com sucesso.
+		/// Retorna NotFound se o utilizador não existir.
+		/// </returns>
+		[Authorize]
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {
@@ -241,8 +312,16 @@ namespace TurismoRural.Controllers
             return Ok("Logout efetuado com sucesso.");
         }
 
-        // GET: api/Utilizadores
-        [Authorize(Roles = "Support")]
+		// GET: api/Utilizadores
+		/// <summary>
+		/// Lista todos os utilizadores.
+		/// Apenas utilizadores com papel "Support" podem executar esta ação.
+		/// </summary>
+		/// <returns>
+		/// Retorna OK com a lista de utilizadores.
+		/// Retorna Forbid se quem pede não for administrador/support.
+		/// </returns>
+		[Authorize(Roles = "Support")]
         [HttpGet]
         public async Task<IActionResult> GetAllUsers()
         {
@@ -266,9 +345,5 @@ namespace TurismoRural.Controllers
 
             return Ok(utilizadores);
         }
-
-
-
-
     }
 }

@@ -21,10 +21,17 @@ namespace TurismoRural.Controllers
             _context = context;
         }
 
-        /// <summary>
-        /// Upload de imagem para uma casa
-        /// </summary>
-        [HttpPost("upload/{casaId}")]
+		/// <summary>
+		/// Efetua o upload de uma imagem associada a uma casa.
+		/// A imagem é guardada no disco e o respetivo caminho é armazenado na base de dados.
+		/// </summary>
+		/// <param name="file">Ficheiro de imagem enviado pelo cliente.</param>
+		/// <param name="casaId">Identificador da casa à qual a imagem pertence.</param>
+		/// <returns>
+		/// Retorna OK com o caminho relativo da imagem se o upload for bem-sucedido.
+		/// Retorna BadRequest se nenhum ficheiro for enviado.
+		/// </returns>
+		[HttpPost("upload/{casaId}")]
         public async Task<IActionResult> UploadImagemCasa(IFormFile file, int casaId)
         {
             if (file == null || file.Length == 0)
@@ -58,10 +65,16 @@ namespace TurismoRural.Controllers
             return Ok(new { path = caminhoRelativo });
         }
 
-        /// <summary>
-        /// Retorna URLs das imagens associadas à casa
-        /// </summary>
-        [HttpGet("{casaId}")]
+		/// <summary>
+		/// Obtém todas as imagens associadas a uma determinada casa.
+		/// Para cada imagem é devolvida a respetiva URL pública.
+		/// </summary>
+		/// <param name="casaId">Identificador da casa.</param>
+		/// <returns>
+		/// Retorna uma lista de imagens com os respetivos URLs.
+		/// Retorna NotFound se a casa não tiver imagens associadas.
+		/// </returns>
+		[HttpGet("{casaId}")]
         public async Task<IActionResult> GetImagensDaCasa(int casaId)
         {
             var imagens = await _context.Casa_img
@@ -80,10 +93,16 @@ namespace TurismoRural.Controllers
             return Ok(imagens);
         }
 
-        /// <summary>
-        /// Elimina uma imagem (do disco e do banco)
-        /// </summary>
-        [HttpDelete("{imagemId}")]
+		/// <summary>
+		/// Elimina uma imagem associada a uma casa.
+		/// A imagem é removida tanto do disco como da base de dados.
+		/// </summary>
+		/// <param name="imagemId">Identificador da imagem a eliminar.</param>
+		/// <returns>
+		/// Retorna NoContent se a imagem for eliminada com sucesso.
+		/// Retorna NotFound se a imagem não existir.
+		/// </returns>
+		[HttpDelete("{imagemId}")]
         public async Task<IActionResult> DeletarImagem(int imagemId)
         {
             var imagem = await _context.Casa_img.FindAsync(imagemId);

@@ -26,8 +26,21 @@ namespace TurismoRural.Controllers
             _googleCalendar = googleCalendar;
         }
 
-        // POST: api/Reservas/CriarReserva
-        [Authorize(Roles="User")]
+		// POST: api/Reservas/CriarReserva
+		/// <summary>
+		/// Cria uma nova reserva para uma casa.
+		/// Apenas utilizadores autenticados com o papel "User" podem criar reservas.
+		/// Valida datas, valida existência da casa e impede sobreposição com outras reservas (exceto canceladas).
+		/// Após criar a reserva na base de dados, cria também um evento no Google Calendar e guarda o respetivo GoogleEventId.
+		/// </summary>
+		/// <param name="dto">Dados da reserva (CasaID, DataInicio e DataFim).</param>
+		/// <returns>
+		/// Retorna OK se a reserva for criada com sucesso.
+		/// Retorna BadRequest se os dados forem inválidos, se as datas forem inválidas
+		/// ou se existir conflito com outra reserva.
+		/// Retorna NotFound se a casa não existir.
+		/// </returns>
+		[Authorize(Roles="User")]
         [HttpPost("CriarReserva")]
         public async Task<IActionResult> CriarReserva([FromBody] CriarReservaDTO dto)
         {
@@ -100,6 +113,22 @@ namespace TurismoRural.Controllers
 
 
 		// PUT: api/Reservas/id
+		/// <summary>
+		/// Edita uma reserva existente.
+		/// Apenas o utilizador que criou a reserva pode editá-la.
+		/// Só é permitido editar reservas com estado "Pendente".
+		/// Também valida conflitos de datas com outras reservas.
+		/// Caso exista GoogleEventId, tenta atualizar o evento no Google Calendar.
+		/// </summary>
+		/// <param name="id">Identificador da reserva a editar.</param>
+		/// <param name="dto">Novas datas da reserva (DataInicio e DataFim).</param>
+		/// <returns>
+		/// Retorna OK se a reserva for editada com sucesso.
+		/// Retorna BadRequest se os dados/datas forem inválidos, se existir conflito
+		/// ou se a reserva não estiver no estado "Pendente".
+		/// Retorna NotFound se a reserva não existir.
+		/// Retorna Forbid se o utilizador não for o proprietário da reserva.
+		/// </returns>
 		[Authorize(Roles = "User")]
         [HttpPut("EditarReserva/{id}")]
         public async Task<IActionResult> EditarReserva(int id, [FromBody] EditarReservaDTO dto)
@@ -145,7 +174,6 @@ namespace TurismoRural.Controllers
 
 			if (!string.IsNullOrWhiteSpace(reserva.GoogleEventId))
 			{
-				// Ajusta isto ao teu “significado” de data fim (se for checkout, normalmente é dia seguinte 00:00)
 				var startUtc = dto.DataInicio.ToDateTime(TimeOnly.MinValue).ToUniversalTime();
 				var endUtc = dto.DataFim.ToDateTime(TimeOnly.MinValue).ToUniversalTime();
 
@@ -158,8 +186,6 @@ namespace TurismoRural.Controllers
 				}
 				catch
 				{
-					// Não rebento o endpoint porque a BD já ficou consistente.
-					// Se quiseres, podes devolver 200 com aviso.
 					return Ok("Reserva editada com sucesso! (Aviso: não foi possível atualizar o Google Calendar)");
 				}
 			}
@@ -167,8 +193,21 @@ namespace TurismoRural.Controllers
 			return Ok("Reserva editada com sucesso!");
         }
 
-        // DELETE :api/Reserva/id
-        [Authorize(Roles = "User")]
+		// DELETE :api/Reserva/id
+		/// <summary>
+		/// Cancela uma reserva existente.
+		/// Apenas o utilizador que criou a reserva pode cancelá-la.
+		/// Não permite cancelar reservas que já começaram (DataInicio <= hoje).
+		/// Se existir GoogleEventId, tenta remover o evento do Google Calendar e, opcionalmente, limpa o GoogleEventId.
+		/// </summary>
+		/// <param name="id">Identificador da reserva a cancelar.</param>
+		/// <returns>
+		/// Retorna OK se a reserva for cancelada com sucesso.
+		/// Retorna NotFound se a reserva não existir.
+		/// Retorna Forbid se o utilizador não for o proprietário da reserva.
+		/// Retorna BadRequest se a reserva já tiver começado.
+		/// </returns>
+		[Authorize(Roles = "User")]
         [HttpDelete("CancelarReserva/{id}")]
         public async Task<IActionResult> CancelarReserva(int id)
         {
@@ -196,7 +235,6 @@ namespace TurismoRural.Controllers
 				{
 					await _googleCalendar.DeleteEventAsync(reserva.GoogleEventId);
 
-					// opcional: limpar o id depois de apagar
 					reserva.GoogleEventId = null;
 					await _context.SaveChangesAsync();
 				}
@@ -209,8 +247,16 @@ namespace TurismoRural.Controllers
 			return Ok("Reserva cancelada com sucesso!");
         }
 
-        // GET: api/Reservas/PorCasa/id
-        [HttpGet("PorCasa/{casaId}")]
+		// GET: api/Reservas/PorCasa/id
+		/// <summary>
+		/// Obtém as reservas associadas a uma determinada casa.
+		/// Devolve as reservas ordenadas por DataInicio.
+		/// </summary>
+		/// <param name="casaId">Identificador da casa.</param>
+		/// <returns>
+		/// Retorna OK com a lista de reservas da casa.
+		/// </returns>
+		[HttpGet("PorCasa/{casaId}")]
         public async Task<IActionResult> GetReservasPorCasa(int casaId)
         {
             var reservas = await _context.Reserva
@@ -229,8 +275,15 @@ namespace TurismoRural.Controllers
             return Ok(reservas);
         }
 
-        // GET: api/Reservas/MinhasReservas
-        [HttpGet("MinhasReservas")]
+		// GET: api/Reservas/MinhasReservas
+		/// <summary>
+		/// Obtém as reservas do utilizador autenticado.
+		/// Inclui informação da casa (título e morada) e, se existir, dados da avaliação do utilizador para essa casa.
+		/// </summary>
+		/// <returns>
+		/// Retorna OK com a lista de reservas do utilizador autenticado.
+		/// </returns>
+		[HttpGet("MinhasReservas")]
         [Authorize]
         public async Task<IActionResult> GetMinhasReservas()
         {
@@ -272,8 +325,15 @@ namespace TurismoRural.Controllers
             return Ok(reservas);
         }
 
-        // PUT: api/Reservas/AtualizarEstados
-        [HttpPut("AtualizarEstados")]
+		// PUT: api/Reservas/AtualizarEstados
+		/// <summary>
+		/// Atualiza automaticamente o estado das reservas.
+		/// Todas as reservas com estado "Pendente" e DataFim menor ou igual a hoje passam para "Terminada".
+		/// </summary>
+		/// <returns>
+		/// Retorna OK com a quantidade de reservas atualizadas.
+		/// </returns>
+		[HttpPut("AtualizarEstados")]
         public async Task<IActionResult> AtualizarEstados()
         {
             var hoje = DateOnly.FromDateTime(DateTime.Now);
