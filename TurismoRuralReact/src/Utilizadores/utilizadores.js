@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './utilizadores.module.css';   // novo CSS
+import styles from './utilizadores.module.css';  
 
 const Utilizadores = () => {
   const navigate = useNavigate();

@@ -188,6 +188,9 @@ const CasaDetalhes = () => {
       if (response.ok) {
         const text = await response.text();
         setReservaMensagem(text || 'Reserva criada com sucesso!');
+         // limpar datas depois de criar a reserva
+        setDataInicio('');
+        setDataFim('');
         const resp = await fetch(`http://localhost:5211/api/Reservas/PorCasa/${id}`);
         if (resp.ok) {
           const data = await resp.json();

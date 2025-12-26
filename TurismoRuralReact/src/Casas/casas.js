@@ -4,7 +4,7 @@ import styles from './casas.module.css';
 
 const Casas = () => {
   const [casas, setCasas] = useState([]);
-  const [imagens, setImagens] = useState({}); // { [casaId]: url }
+  const [imagens, setImagens] = useState({}); 
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   const [user, setUser] = useState(null);

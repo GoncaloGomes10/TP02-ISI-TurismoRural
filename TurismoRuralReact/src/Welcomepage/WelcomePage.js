@@ -73,7 +73,7 @@ const WelcomePage = () => {
   const goToSignup = () => navigate('/signup');
   const goToCasas = () => navigate('/casas');
   const goToMinhasReservas = () => navigate('/minhas-reservas');
-  const goToListaUtilizadores = () => navigate('/utilizadores'); // futura página
+  const goToListaUtilizadores = () => navigate('/utilizadores'); 
 
   if (isLoading) {
     return (
@@ -87,7 +87,7 @@ const WelcomePage = () => {
     );
   }
 
-  // adapta estes nomes ao que vier no teu /profile (por ex. isSupport)
+  
   const isAdmin = user?.isSupport === true || user?.IsSupport === true;
 
   return (
@@ -187,7 +187,7 @@ const WelcomePage = () => {
                 </>
               )
             ) : (
-              // visitante (não autenticado)
+              // visitante (não logado)
               <>
                 <button 
                   onClick={goToSignup}

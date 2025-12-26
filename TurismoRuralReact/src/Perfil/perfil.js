@@ -108,7 +108,7 @@ const Perfil = () => {
           nome: formData.nome,
           email: formData.email,
           telemovel: formData.telemovel,
-          palavraPass: formData.palavraPasse // nome igual ao backend
+          palavraPass: formData.palavraPasse 
         })
       });
 

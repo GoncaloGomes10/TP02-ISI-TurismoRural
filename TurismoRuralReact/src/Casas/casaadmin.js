@@ -8,7 +8,7 @@ const CasasAdmin = () => {
   const [erro, setErro] = useState('');
   const [mensagem, setMensagem] = useState('');
 
-  const [editingCasa, setEditingCasa] = useState(null);   // objeto da casa em edição/criação
+  const [editingCasa, setEditingCasa] = useState(null);   
   const [showFormModal, setShowFormModal] = useState(false);
 
   const [deleteId, setDeleteId] = useState(null);

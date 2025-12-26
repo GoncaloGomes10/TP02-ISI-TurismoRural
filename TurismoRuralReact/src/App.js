@@ -65,7 +65,7 @@ function App() {
             }
           />
 
-          {/* Autenticação (só faz sentido para não logados, mas aqui basta serem públicas) */}
+          {/* Autenticação */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
 
